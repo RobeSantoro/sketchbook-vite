@@ -3,14 +3,14 @@ import * as THREE from 'three';
 import { World } from './World';
 import { EntityType } from '../enums/EntityType';
 import { IUpdatable } from '../interfaces/IUpdatable';
-import { default as CSM } from 'three-csm';
+/* import * as CSM from 'three-csm'; */
 
 export class Sky extends THREE.Object3D implements IUpdatable
 {
 	public updateOrder: number = 5;
 
 	public sunPosition: THREE.Vector3 = new THREE.Vector3();
-	public csm: CSM;
+	//public csm: CSM;
 
 	set theta(value: number) {
 		this._theta = value;
@@ -66,28 +66,29 @@ export class Sky extends THREE.Object3D implements IUpdatable
 
 		// CSM
 		// New version
-		// let splitsCallback = (amount, near, far, target) =>
-		// {
-		// 	for (let i = amount - 1; i >= 0; i--)
-		// 	{
-		// 		target.push(Math.pow(1 / 3, i));
-		// 	}
-		// };
-
-		// Legacy
-		let splitsCallback = (amount, near, far) =>
+/* 		let splitsCallback = (amount, near, far, target) =>
 		{
-			let arr = [];
-
 			for (let i = amount - 1; i >= 0; i--)
 			{
-				arr.push(Math.pow(1 / 4, i));
+				target.push(Math.pow(1 / 3, i));
 			}
+		}; */
 
-			return arr;
-		};
+/* Legacy
+	let splitsCallback = (amount, near, far) =>
+	{
+		let arr = [];
 
-		this.csm = new CSM({
+		for (let i = amount - 1; i >= 0; i--)
+		{
+			arr.push(Math.pow(1 / 4, i));
+		}
+
+		return arr;
+	};
+*/
+
+		/* this.csm = new CSM({
 			fov: 80,
 			far: 250,	// maxFar
 			lightIntensity: 2.5,
@@ -98,7 +99,7 @@ export class Sky extends THREE.Object3D implements IUpdatable
 			mode: 'custom',
 			customSplitsCallback: splitsCallback
 		});
-		this.csm.fade = true;
+		this.csm.fade = true; */
 
 		this.refreshSunPosition();
 		
@@ -111,8 +112,8 @@ export class Sky extends THREE.Object3D implements IUpdatable
 		this.position.copy(this.world.camera.position);
 		this.refreshSunPosition();
 
-		this.csm.update(this.world.camera.matrix);
-		this.csm.lightDirection = new THREE.Vector3(-this.sunPosition.x, -this.sunPosition.y, -this.sunPosition.z).normalize();
+		// this.csm.update(this.world.camera.matrix);
+		// this.csm.lightDirection = new THREE.Vector3(-this.sunPosition.x, -this.sunPosition.y, -this.sunPosition.z).normalize();
 	}
 
 	public refreshSunPosition(): void

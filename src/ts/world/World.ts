@@ -337,7 +337,7 @@ export class World
 				if (child.type === 'Mesh')
 				{
 					Utils.setupMeshProperties(child);
-					this.sky.csm.setupMaterial(child.material);
+					// this.sky.csm.setupMaterial(child.material);
 
 					if (child.material.name === 'ocean')
 					{
@@ -365,7 +365,7 @@ export class World
 
 								this.physicsWorld.addBody(phys.body);
 							}
-							else if (child.userData.type === 'trimesh')
+							else if (child.userData.type === 'trimeshes') /////////////////////////////////////////////////////////// EDITED TO AVOID TRIMESH COLLIDER
 							{
 								let phys = new TrimeshCollider(child, {});
 								this.physicsWorld.addBody(phys.body);
