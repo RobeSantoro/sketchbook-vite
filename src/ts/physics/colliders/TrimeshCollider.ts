@@ -29,7 +29,7 @@ export class TrimeshCollider implements ICollider
 		mat.friction = options.friction;
 		// mat.restitution = 0.7;
 
-		let shape = threeToCannon(this.mesh, {type: threeToCannon.Type.MESH});
+		let shape = threeToCannon(this.mesh, {type: ShapeType.MESH});
 		// shape['material'] = mat;
 
 		// Add phys sphere
